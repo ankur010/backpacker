@@ -1,0 +1,16 @@
+.slick-next:before, .slick-prev:before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--ui-color-text);
+    font-family: TeXGyreAdventor;
+    font-size: 14px;
+}
+.slick-prev:before {
+    content: '<'
+}
+
+.slick-next:before{
+    content: '>'
+}

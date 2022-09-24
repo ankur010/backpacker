@@ -1,0 +1,129 @@
+.card-container {
+  min-width: 360px;
+  max-width: 414px;
+  .ribbonUp {
+    width: 24px;
+    height: 24px;
+    padding: 5px 0;
+    position: absolute;
+    top: -2px;
+    right: 25px;
+    text-align: center;
+    background: var(--ui-color-primary);
+    z-index: 10;
+    img {
+      height: 16px;
+      width: 12px;
+    }
+  }
+  .ribbonUp:after {
+    content: '';
+    position: absolute;
+  }
+  .ribbonUp:after {
+    height: 0;
+    width: 0;
+    bottom: -10.5px;
+    left: 0;
+    border-left: 12px solid   var(--ui-color-primary);
+    border-right: 12px solid  var(--ui-color-primary);
+    border-bottom: 12px solid transparent;
+  }
+  .image-container {
+    padding: 0px 12px;
+    height: 230px;
+    img {
+      height: 230px;
+      width: 100%;
+      border-radius: 12px;
+    }
+    .image-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 24px;
+      text-align: left;
+      font-family: TeXGyreAdventor;
+
+      text-transform: capitalize;
+    }
+  }
+  .content-container {
+    padding: 12px;
+    .user-container {
+      display: flex;
+      img {
+        height: 48px;
+        width: 48px;
+        border-radius: 50%;
+      }
+    }
+    .username-container {
+      padding-left: 12px;
+      width: 100%;
+      .username-container1 {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        .username {
+          font-size: 18px;
+          font-weight: 700;
+          line-height: 24px;
+          text-align: left;
+          color: var(--ui-color-text);
+          text-transform: capitalize;
+          font-family: TeXGyreAdventor;
+        }
+        .action-container {
+          display: flex;
+          justify-content: flex-end;
+          .likes,
+          .views {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            span,
+            .icon {
+              font-size: 12px;
+              font-weight: 400;
+              line-height: 18px;
+              text-align: left;
+              color: var(--ui-color-text);
+              font-family: TeXGyreAdventor;
+            }
+            .count {
+              padding-left: 4px;
+            }
+          }
+          .views {
+            padding-left: 12px;
+          }
+        }
+      }
+      .tags {
+        .tag {
+          background-color: #f6f6f6;
+          color: var(--ui-color-text);
+          font-family: TeXGyreAdventor;
+          font-size: 12px;
+          font-weight: 400;
+          padding: 4px 8px;
+          line-height: 18px;
+          border-radius: 12px;
+          text-transform: capitalize;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .card-container {
+    min-width: 336px;
+    max-width: 382px;
+  }
+}

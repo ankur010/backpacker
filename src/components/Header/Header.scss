@@ -1,0 +1,168 @@
+.headerContainer {
+  --HAMBURGER_ICON_SIZE: calc(var(--ui-navbar-height) - 50px);
+  //
+  align-items: center;
+  background: none;
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  padding: 10px calc(var(--ui-navbar-height) + var(--ui-global-margin)) 10px
+    var(--ui-global-margin);
+  position: relative;
+  width: 100%;
+  .logo {
+    height: 90%;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  & > nav {
+    padding-right: 20px;
+    a {
+      color: #fff;
+      text-decoration: none;
+      &:not(:first-child) {
+        margin-left: 1rem;
+      }
+      &.active {
+        color: var(--ui-color-link-hover);
+      }
+      &:hover {
+        color: var(--ui-color-link-hover);
+      }
+    }
+  }
+  .sidebar {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+    .hamburger-menu {
+      align-items: center;
+      display: flex;
+      height: var(--ui-navbar-height);
+      justify-content: center;
+      position: relative;
+      right: var(--ui-global-margin);
+      width: var(--ui-navbar-height);
+      .icon {
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          transparent calc((var(--HAMBURGER_ICON_SIZE) / 9) * 4),
+          #fff calc((var(--HAMBURGER_ICON_SIZE) / 9) * 4),
+          #fff calc((var(--HAMBURGER_ICON_SIZE) / 9) * 5),
+          transparent calc((var(--HAMBURGER_ICON_SIZE) / 9) * 5),
+          transparent
+        );
+        display: inline-block;
+        height: var(--HAMBURGER_ICON_SIZE);
+        position: relative;
+        width: var(--HAMBURGER_ICON_SIZE);
+        &:hover {
+          cursor: pointer;
+        }
+        &::after,
+        &::before {
+          background: #fff;
+          content: "";
+          height: calc(var(--HAMBURGER_ICON_SIZE) / 9);
+          left: 0;
+          position: absolute;
+          width: 100%;
+        }
+        &::after {
+          bottom: 0;
+        }
+        &::before {
+          top: 0;
+        }
+      }
+    }
+    .backdrop {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 8;
+      top: 0;
+      right: 0;
+      overflow-y: hidden;
+    }
+    .content {
+      background: rgba($color: #e7e7e7, $alpha: 0.98);
+      display: none;
+      height: 100vh;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transform: translateX(var(--ui-sidebar-width));
+      width: var(--ui-sidebar-width);
+      z-index: 9;
+      .close {
+        background: linear-gradient(
+          45deg,
+          transparent,
+          transparent calc((var(--HAMBURGER_ICON_SIZE) / 9) * 6),
+          #fff calc((var(--HAMBURGER_ICON_SIZE) / 9) * 6),
+          #fff calc((var(--HAMBURGER_ICON_SIZE) / 9) * 7),
+          transparent calc((var(--HAMBURGER_ICON_SIZE) / 9) * 7),
+          transparent
+        );
+        border-radius: 5px;
+        display: inline-block;
+        height: var(--HAMBURGER_ICON_SIZE);
+        margin: 25px;
+        overflow: hidden;
+        position: relative;
+        width: var(--HAMBURGER_ICON_SIZE);
+        &:hover {
+          cursor: pointer;
+        }
+        &::after {
+          background: linear-gradient(
+            -45deg,
+            transparent,
+            transparent calc((var(--HAMBURGER_ICON_SIZE) / 9) * 6),
+            #fff calc((var(--HAMBURGER_ICON_SIZE) / 9) * 6),
+            #fff calc((var(--HAMBURGER_ICON_SIZE) / 9) * 7),
+            transparent calc((var(--HAMBURGER_ICON_SIZE) / 9) * 7),
+            transparent
+          );
+          content: "";
+          height: 100%;
+          left: 0;
+          position: absolute;
+          top: 0;
+          width: 100%;
+        }
+      }
+      nav {
+        align-items: center;
+        border-top: 1px solid var(--ui-color-header);
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        padding: 20px 0;
+        justify-content: center;
+        width: calc(100% - 20px);
+        a {
+          color: var(--ui-color-text);
+          margin: 1rem auto;
+          text-decoration: none;
+          &.active {
+            color: var(--ui-color-link-hover);
+          }
+          &:hover {
+            color: var(--ui-color-link-hover);
+          }
+        }
+      }
+      &--active {
+        display: flex;
+        flex-direction: column;
+        transform: translateX(0);
+      }
+    }
+  }
+}

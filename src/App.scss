@@ -1,0 +1,76 @@
+
+
+@font-face {
+  font-family: "TeXGyreAdventor-Bold'";
+  src: url("./assets/font/TeXGyreAdventor-Bold.otf"),
+  url('./assets/font/TeXGyreAdventor-Bold.woff') format('woff'),
+  url('./assets/font/TeXGyreAdventor-Bold.ttf') format('ttf'),
+}
+@font-face {
+  font-family: "TeXGyreAdventor-Regular'";
+  src: url("./assets/font/TeXGyreAdventor-Regular.otf"),
+  url('./assets/font/TeXGyreAdventor-Regular.woff') format('woff'),
+  url('./assets/font/TeXGyreAdventor-Regular.ttf') format('ttf'),
+}
+
+:root {
+  // sizing
+  --ui-navbar-height: 72px;
+  --ui-sidebar-width: calc(320px - var(--ui-navbar-height));
+  --ui-global-margin: 10vw;
+
+  // color
+  --ui-color-primary: #00CFFF;
+  --ui-color-light-gray: #e7e7e7;
+  --ui-color-background: #f8f9fa;
+  --ui-color-text: #283c45;
+  --ui-color-link-default: #9eeaf9;
+  --ui-color-link-hover: var(--ui-color-primary);
+  --ui-color-header: #dad7d7;
+  --ui-color-sidebar: #c7c7c7;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-weight: normal;
+  margin: 0;
+  position: relative;
+}
+
+body {
+  background: var(--ui-color-light-gray);
+  color: var(--ui-color-text);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: color 0.5s, background-color 0.5s;
+}
+
+#root {
+  background: var(--ui-color-light-gray);
+  font-weight: normal;
+  margin: 0 auto;
+  // max-width: 1280px;
+  position: relative;
+  & > * {
+    width: 100%;
+  }
+  header,
+  footer {
+    height: var(--ui-navbar-height);
+    width: 100%;
+  }
+  header {
+    left: 0;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+  }
+}
