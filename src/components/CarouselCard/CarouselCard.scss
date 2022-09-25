@@ -17,7 +17,7 @@
     }
   }
   .ribbonUp:after {
-    content: '';
+    content: "";
     position: absolute;
   }
   .ribbonUp:after {
@@ -25,8 +25,8 @@
     width: 0;
     bottom: -10.5px;
     left: 0;
-    border-left: 12px solid   var(--ui-color-primary);
-    border-right: 12px solid  var(--ui-color-primary);
+    border-left: 12px solid var(--ui-color-primary);
+    border-right: 12px solid var(--ui-color-primary);
     border-bottom: 12px solid transparent;
   }
   .image-container {
@@ -125,5 +125,11 @@
   .card-container {
     min-width: 336px;
     max-width: 382px;
+    .image-container {
+      padding: 0px 8px;
+    }
+    .content-container {
+      padding: 16px;
+    }
   }
 }

@@ -1,73 +1,99 @@
-import React, { useState, useRef, useLayoutEffect, useCallback } from 'react';
+import React, {
+  useState,
+  useRef,
+  useLayoutEffect,
+  useCallback,
+  TouchEvent,
+} from 'react';
 
 import './Carousel.scss';
 import { CarouselCard } from 'components';
 import { IImageHit } from 'common/types';
 
 interface Props {
-  children?: React.ReactElement[];
-  show: number;
-  infiniteLoop: boolean;
   data: IImageHit[];
 }
 const Carousel = ({ data }: Props) => {
   const ref = useRef<any>(null);
   const item = useRef<any>(null);
-  const observer: any = useRef();
+  const observer = useRef<any>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [show, setShow] = useState(0);
+  const [show, setShow] = useState<number>(0);
+  const [hideNext, setHideNext] = useState<boolean>(false);
+  const [showingLast, setShowingLast] = useState<boolean>(false);
+  const [touchPosition, setTouchPosition] = useState<number | null>(null);
   const length = data.length;
 
-  // const [touchPosition, setTouchPosition] = useState<number | null>(null);
-
   useLayoutEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log('ref.current.offsetWidth', ref.current.offsetWidth);
-    // eslint-disable-next-line no-console
-    console.log('item.current.offsetWidth', item.current.offsetWidth);
     setShow(Math.floor(ref.current.offsetWidth / item.current.offsetWidth));
   }, []);
 
   const lastItem = useCallback((node: any) => {
     if (observer.current) observer.current.disconnect();
     observer.current = new IntersectionObserver((entries) => {
-      // eslint-disable-next-line no-console
-      console.log('entries', entries);
       if (entries[0].isIntersecting) {
-        // eslint-disable-next-line no-console
-        console.log('Showing Last');
+        setShowingLast(true);
       }
     });
     if (node) observer.current.observe(node);
   }, []);
 
   const next = () => {
-    if (currentIndex < length) {
-      setCurrentIndex((prevState: number) => prevState + show);
+    setCurrentIndex((prevState: number) => prevState + 1);
+    if (showingLast) {
+      setHideNext(true);
     }
   };
 
   const prev = () => {
     if (currentIndex > 0) {
-      setCurrentIndex((prevState: number) => prevState - show);
+      setCurrentIndex((prevState: number) => prevState - 1);
+      setHideNext(false);
+      setShowingLast(false);
     }
   };
+  const handleTouchStart = (e: TouchEvent) => {
+    const touchDown = e.touches[0].clientX;
+    setTouchPosition(touchDown);
+  };
 
-  // eslint-disable-next-line no-console
-  console.log('currentIndex', currentIndex, show, length);
+  const handleTouchMove = (e: TouchEvent) => {
+    const touchDown = touchPosition;
+    if (touchDown === null) {
+      return;
+    }
+    const currentTouch = e.touches[0].clientX;
+    const diff = touchDown - currentTouch;
+    if (diff > 5) {
+      next();
+    }
+    if (diff < -5) {
+      prev();
+    }
+    setTouchPosition(null);
+  };
+
   return (
-    <div ref={ref} className="carousel-container">
+    <div
+      className="carousel-container"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+    >
       <div className="carousel-wrapper">
-        {currentIndex > 0 && (
-          <button onClick={prev} className="left-arrow">
-            &lt;
-          </button>
-        )}
+        <button
+          disabled={!(currentIndex > 0)}
+          onClick={prev}
+          className="left-arrow"
+        >
+          &lt;
+        </button>
+
         <div className="carousel-content-wrapper">
           <div
             className={`carousel-content show-${show}`}
             style={{
               transform: `translateX(-${currentIndex * (100 / show)}%)`,
+              //transition: !transitionEnabled ? 'none' : undefined,
             }}
             ref={ref}
           >
@@ -89,11 +115,9 @@ const Carousel = ({ data }: Props) => {
           </div>
         </div>
 
-        {currentIndex < length - show && (
-          <button onClick={next} className="right-arrow">
-            &gt;
-          </button>
-        )}
+        <button disabled={hideNext} onClick={next} className="right-arrow">
+          &gt;
+        </button>
       </div>
     </div>
   );

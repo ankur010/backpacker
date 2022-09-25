@@ -17,10 +17,11 @@ import {
   luisaAvatar,
   jonasAvatar,
 } from 'assets';
-import { Carousel, Slider } from 'components';
+import { Carousel } from 'components';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
 
 import { getImages, getMemoizedImages } from './HomeSlice';
+
 import './Home.scss';
 
 const itineraries = [
@@ -240,10 +241,7 @@ const Home = () => {
         </div>
       </section>
       <section className="image-carousel">
-        <Carousel show={4} infiniteLoop={false} data={imagesList}></Carousel>
-      </section>
-      <section className="image-carousel">
-        <Slider data={imagesList} />
+        <Carousel data={imagesList} />
       </section>
 
       <section className="backpackers">
